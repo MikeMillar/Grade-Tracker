@@ -13,11 +13,11 @@ public class Classes {
     private double percent;
     private char letterGrade;
     
-    public Classes(String name, String professor, ArrayList<AssignmentType> assignmentTypes) {
+    public Classes(String name, String professor) {
         setName(name);
         setProfessor(professor);
-        setAssignmentTypes(assignmentTypes);
-        this.assignments = new ArrayList<Assignment>();
+        this.assignmentTypes = new ArrayList<>();
+        this.assignments = new ArrayList<>();
     }
     
     private void setAssignmentTypes(ArrayList<AssignmentType> types) {
@@ -135,5 +135,10 @@ public class Classes {
     
     public void modifyAssignmentType(AssignmentType type) {
         // TODO - write method
+    }
+    
+    @Override
+    public String toString() {
+        return this.name + ": " + this.professor;
     }
 }

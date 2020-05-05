@@ -1,5 +1,10 @@
 package Main;
 
+import Main.Models.Assignment;
+import Main.Models.Classes;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
+import javafx.concurrent.Task;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
 import javafx.scene.layout.AnchorPane;
@@ -7,6 +12,8 @@ import javafx.scene.layout.BackgroundFill;
 import javafx.scene.layout.HBox;
 import javafx.scene.paint.Color;
 import javafx.scene.paint.Paint;
+
+import java.util.ArrayList;
 
 public class Controller {
 
@@ -50,21 +57,22 @@ public class Controller {
     @FXML private HBox classesTitleHbox;
     @FXML private Label classesLabel;
     @FXML private Button addClassBtn;
-    @FXML private ScrollPane classScrollPane;
-    @FXML private ListView classesList; // Add type to view
+    @FXML private ListView<Classes> classesList;
     
     // Assignment Sub-Items
     @FXML private HBox assignmentTitleHbox;
     @FXML private Label assignmentLabel;
     @FXML private Button addAssignmentBtn;
-    @FXML private ScrollPane assignmentScrollPane;
-    @FXML private ListView assignmentList; // Add type to view
+    @FXML private TableView<Assignment> assignmentList;
     
     // Detail Sub-Items
     @FXML private HBox detailsTitleHbox;
     @FXML private Label detailsLabel;
-    @FXML private ScrollPane detailScrollPane;
     @FXML private ListView detailList; // Add type to view
+    
+    // Lists
+    private ArrayList<Classes> classList;
+    private ArrayList<Assignment> classAssignmentList;
     
     
     public void initialize() {
@@ -74,6 +82,8 @@ public class Controller {
         detailsAnchorPane.minWidthProperty().bind(mainSplitPane.widthProperty().multiply(0.15));
         assignmentsAnchorPane.maxWidthProperty().bind(mainSplitPane.widthProperty().multiply(0.7));
         assignmentsAnchorPane.minWidthProperty().bind(mainSplitPane.widthProperty().multiply(0.5));
+        classesList.prefHeightProperty().bind(classesAnchorPane.heightProperty().subtract(40));
+        classesList.prefWidthProperty().bind(classesAnchorPane.widthProperty().add(15));
         
         addClassBtn.hoverProperty().addListener(e -> {
             if (addClassBtn.isHover()) {
@@ -89,6 +99,65 @@ public class Controller {
                 addAssignmentBtn.setStyle("-fx-background-color:transparent;");
             }
         });
+        Task<ObservableList<Classes>> task = new GetClassListTask();
+        classesList.itemsProperty().bind(task.valueProperty());
+        new Thread(task).start();
     }
-    
+}
+
+class GetClassListTask extends Task {
+    @Override
+    protected Object call() throws Exception {
+        ObservableList<Classes> classes = FXCollections.observableArrayList(
+                new Classes("Math", "Mr. White"),
+                new Classes("Science", "Mrs. Fisher"),
+                new Classes("Intro to Programming", "Tim Buchalka"),
+                new Classes("Intro to Programming", "Tim Buchalka"),
+                new Classes("Intro to Programming", "Tim Buchalka"),
+                new Classes("Intro to Programming", "Tim Buchalka"),
+                new Classes("Intro to Programming", "Tim Buchalka"),
+                new Classes("Intro to Programming", "Tim Buchalka"),
+                new Classes("Intro to Programming", "Tim Buchalka"),
+                new Classes("Intro to Programming", "Tim Buchalka"),
+                new Classes("Intro to Programming", "Tim Buchalka"),
+                new Classes("Intro to Programming", "Tim Buchalka"),
+                new Classes("Intro to Programming", "Tim Buchalka"),
+                new Classes("Intro to Programming", "Tim Buchalka"),
+                new Classes("Intro to Programming", "Tim Buchalka"),
+                new Classes("Intro to Programming", "Tim Buchalka"),
+                new Classes("Intro to Programming", "Tim Buchalka"),
+                new Classes("Intro to Programming", "Tim Buchalka"),
+                new Classes("Intro to Programming", "Tim Buchalka"),
+                new Classes("Intro to Programming", "Tim Buchalka"),
+                new Classes("Intro to Programming", "Tim Buchalka"),
+                new Classes("Intro to Programming", "Tim Buchalka"),
+                new Classes("Intro to Programming", "Tim Buchalka"),
+                new Classes("Intro to Programming", "Tim Buchalka"),
+                new Classes("Intro to Programming", "Tim Buchalka"),
+                new Classes("Intro to Programming", "Tim Buchalka"),
+                new Classes("Intro to Programming", "Tim Buchalka"),
+                new Classes("Intro to Programming", "Tim Buchalka"),
+                new Classes("Intro to Programming", "Tim Buchalka"),
+                new Classes("Intro to Programming", "Tim Buchalka"),
+                new Classes("Intro to Programming", "Tim Buchalka"),
+                new Classes("Intro to Programming", "Tim Buchalka"),
+                new Classes("Intro to Programming", "Tim Buchalka"),
+                new Classes("Intro to Programming", "Tim Buchalka"),
+                new Classes("Intro to Programming", "Tim Buchalka"),
+                new Classes("Intro to Programming", "Tim Buchalka"),
+                new Classes("Intro to Programming", "Tim Buchalka"),
+                new Classes("Intro to Programming", "Tim Buchalka"),
+                new Classes("Intro to Programming", "Tim Buchalka"),
+                new Classes("Intro to Programming", "Tim Buchalka"),
+                new Classes("Intro to Programming", "Tim Buchalka"),
+                new Classes("Intro to Programming", "Tim Buchalka"),
+                new Classes("Intro to Programming", "Tim Buchalka"),
+                new Classes("Intro to Programming", "Tim Buchalka"),
+                new Classes("Intro to Programming", "Tim Buchalka"),
+                new Classes("Intro to Programming", "Tim Buchalka"),
+                new Classes("Intro to Programming", "Tim Buchalka"),
+                new Classes("Intro to Programming", "Tim Buchalka")
+        );
+        return classes;
+    }
 }
