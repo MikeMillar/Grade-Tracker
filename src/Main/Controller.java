@@ -2,6 +2,7 @@ package Main;
 
 import Main.Models.Assignment;
 import Main.Models.Classes;
+import Main.Models.Datasource;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.concurrent.Task;
@@ -71,8 +72,8 @@ public class Controller {
     @FXML private ListView detailList; // Add type to view
     
     // Lists
-    private ArrayList<Classes> classList;
-    private ArrayList<Assignment> classAssignmentList;
+    public ArrayList<Classes> classesArrayList;
+    public Task<ObservableList<Assignment>> assignmentTask;
     
     
     public void initialize() {
@@ -99,65 +100,31 @@ public class Controller {
                 addAssignmentBtn.setStyle("-fx-background-color:transparent;");
             }
         });
+    
+        
+        Datasource.getInstance().addClass(new Classes("Math", "Mr. White"));
+        Datasource.getInstance().addClass(new Classes("Science", "Mrs. Fisher"));
+        Datasource.getInstance().addClass(new Classes("Intro to Programming", "Tim Buchalka"));
+        
         Task<ObservableList<Classes>> task = new GetClassListTask();
         classesList.itemsProperty().bind(task.valueProperty());
         new Thread(task).start();
     }
+    
+    @FXML
+    public void addClass() {
+        Classes classes = new Classes("Testing 101", "DHARM");
+        Datasource.getInstance().addClass(classes);
+        classesList.refresh();
+    }
 }
 
+
 class GetClassListTask extends Task {
+    
     @Override
-    protected Object call() throws Exception {
-        ObservableList<Classes> classes = FXCollections.observableArrayList(
-                new Classes("Math", "Mr. White"),
-                new Classes("Science", "Mrs. Fisher"),
-                new Classes("Intro to Programming", "Tim Buchalka"),
-                new Classes("Intro to Programming", "Tim Buchalka"),
-                new Classes("Intro to Programming", "Tim Buchalka"),
-                new Classes("Intro to Programming", "Tim Buchalka"),
-                new Classes("Intro to Programming", "Tim Buchalka"),
-                new Classes("Intro to Programming", "Tim Buchalka"),
-                new Classes("Intro to Programming", "Tim Buchalka"),
-                new Classes("Intro to Programming", "Tim Buchalka"),
-                new Classes("Intro to Programming", "Tim Buchalka"),
-                new Classes("Intro to Programming", "Tim Buchalka"),
-                new Classes("Intro to Programming", "Tim Buchalka"),
-                new Classes("Intro to Programming", "Tim Buchalka"),
-                new Classes("Intro to Programming", "Tim Buchalka"),
-                new Classes("Intro to Programming", "Tim Buchalka"),
-                new Classes("Intro to Programming", "Tim Buchalka"),
-                new Classes("Intro to Programming", "Tim Buchalka"),
-                new Classes("Intro to Programming", "Tim Buchalka"),
-                new Classes("Intro to Programming", "Tim Buchalka"),
-                new Classes("Intro to Programming", "Tim Buchalka"),
-                new Classes("Intro to Programming", "Tim Buchalka"),
-                new Classes("Intro to Programming", "Tim Buchalka"),
-                new Classes("Intro to Programming", "Tim Buchalka"),
-                new Classes("Intro to Programming", "Tim Buchalka"),
-                new Classes("Intro to Programming", "Tim Buchalka"),
-                new Classes("Intro to Programming", "Tim Buchalka"),
-                new Classes("Intro to Programming", "Tim Buchalka"),
-                new Classes("Intro to Programming", "Tim Buchalka"),
-                new Classes("Intro to Programming", "Tim Buchalka"),
-                new Classes("Intro to Programming", "Tim Buchalka"),
-                new Classes("Intro to Programming", "Tim Buchalka"),
-                new Classes("Intro to Programming", "Tim Buchalka"),
-                new Classes("Intro to Programming", "Tim Buchalka"),
-                new Classes("Intro to Programming", "Tim Buchalka"),
-                new Classes("Intro to Programming", "Tim Buchalka"),
-                new Classes("Intro to Programming", "Tim Buchalka"),
-                new Classes("Intro to Programming", "Tim Buchalka"),
-                new Classes("Intro to Programming", "Tim Buchalka"),
-                new Classes("Intro to Programming", "Tim Buchalka"),
-                new Classes("Intro to Programming", "Tim Buchalka"),
-                new Classes("Intro to Programming", "Tim Buchalka"),
-                new Classes("Intro to Programming", "Tim Buchalka"),
-                new Classes("Intro to Programming", "Tim Buchalka"),
-                new Classes("Intro to Programming", "Tim Buchalka"),
-                new Classes("Intro to Programming", "Tim Buchalka"),
-                new Classes("Intro to Programming", "Tim Buchalka"),
-                new Classes("Intro to Programming", "Tim Buchalka")
-        );
-        return classes;
+    protected ObservableList<Classes> call() throws Exception {
+        return FXCollections.observableArrayList(
+                Datasource.getInstance().getClasses());
     }
 }

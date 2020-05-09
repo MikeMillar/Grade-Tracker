@@ -67,7 +67,7 @@
                               <Insets left="10.0" />
                            </HBox.margin>
                       </Label>
-                        <Button fx:id="addClassBtn" alignment="CENTER" layoutX="171.0" layoutY="8.0" minHeight="39.0" minWidth="39.0" mnemonicParsing="false" style="-fx-background-color: transparent;" text="+" textAlignment="CENTER" textFill="#9f9f9f" AnchorPane.bottomAnchor="504.0" AnchorPane.leftAnchor="171.0" AnchorPane.rightAnchor="14.0" AnchorPane.topAnchor="8.0" HBox.hgrow="NEVER">
+                        <Button fx:id="addClassBtn" onAction="#addClass" alignment="CENTER" layoutX="171.0" layoutY="8.0" minHeight="39.0" minWidth="39.0" mnemonicParsing="false" style="-fx-background-color: transparent;" text="+" textAlignment="CENTER" textFill="#9f9f9f" AnchorPane.bottomAnchor="504.0" AnchorPane.leftAnchor="171.0" AnchorPane.rightAnchor="14.0" AnchorPane.topAnchor="8.0" HBox.hgrow="NEVER">
                            <font>
                               <Font size="18.0" />
                            </font>
