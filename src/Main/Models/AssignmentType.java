@@ -1,25 +1,28 @@
 package Main.Models;
 
+import javafx.beans.property.SimpleStringProperty;
+import javafx.beans.property.StringProperty;
+
 public class AssignmentType {
     
-    private String name;
+    private StringProperty name = new SimpleStringProperty();
     private double weight;
     
     
-    public AssignmentType() { }
+    public AssignmentType() {  }
     
     public AssignmentType(String name, double weight) {
         setName(name);
         setWeight(weight);
     }
     
-    public String getName() {
+    public StringProperty getName() {
         return name;
     }
     
     public void setName(String name) {
         if (name != null && !name.isEmpty()) {
-            this.name = name;
+            this.name.setValue(name);
         } else {
             System.out.println("Invalid name, enter valid name");
         }

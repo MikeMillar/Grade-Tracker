@@ -1,5 +1,8 @@
 package Main.Models;
 
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
+
 import java.util.ArrayList;
 
 public class Classes {
@@ -8,7 +11,7 @@ public class Classes {
     private String professor;
     private String courseNumber;
     private ArrayList<AssignmentType> assignmentTypes;
-    private final ArrayList<Assignment> assignments;
+    private final ObservableList<Assignment> assignments;
     private int pointsEarned;
     private int maxPoints;
     private double percent;
@@ -19,7 +22,7 @@ public class Classes {
         setName(name);
         setProfessor(professor);
         createAssignmentTypes(types);
-        this.assignments = new ArrayList<>();
+        this.assignments = FXCollections.observableArrayList();
     }
     
     private void createAssignmentTypes(String text) {
@@ -60,7 +63,7 @@ public class Classes {
         return assignmentTypes;
     }
     
-    public ArrayList<Assignment> getAssignments() {
+    public ObservableList<Assignment> getAssignments() {
         return assignments;
     }
     
@@ -105,16 +108,22 @@ public class Classes {
     }
     
     private void calculateGrade() {
-        this.percent = (double) this.pointsEarned / this.maxPoints;
+        this.percent = (double) (this.pointsEarned / this.maxPoints) * 100;
+        System.out.println(percent);
         if (percent >= 90) {
+            System.out.println("Set A");
             letterGrade = 'A';
         } else if (percent >= 80) {
+            System.out.println("Set B");
             letterGrade = 'B';
         } else if (percent >= 70) {
+            System.out.println("Set C");
             letterGrade = 'C';
         } else if (percent >= 60) {
+            System.out.println("Set D");
             letterGrade = 'D';
         } else {
+            System.out.println("Set F");
             letterGrade = 'F';
         }
     }

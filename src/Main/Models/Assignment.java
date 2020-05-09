@@ -9,6 +9,7 @@ public class Assignment {
     private int pointsEarned;
     private double percent;
     private char grade;
+    private String scoreString;
     
     public Assignment(String name, AssignmentType type, String description, int maxPoints, int pointsEarned) {
         setName(name);
@@ -20,7 +21,7 @@ public class Assignment {
     }
     
     public void calculateGrade() {
-        percent = (double) this.pointsEarned / this.maxPoints;
+        percent = (double) this.pointsEarned / this.maxPoints * 100;
         if (percent >= 90) {
             grade = 'A';
         } else if (percent >= 80) {
@@ -85,9 +86,14 @@ public class Assignment {
     public void setPointsEarned(int pointsEarned) {
         if (pointsEarned >= 0) {
             this.pointsEarned = pointsEarned;
+            this.scoreString = pointsEarned + " / " + this.maxPoints;
         } else {
             System.out.println("Invalid points earned. Enter valid number");
         }
+    }
+    
+    public String getScoreString() {
+        return scoreString;
     }
     
     public char getGrade() {
