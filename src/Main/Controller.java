@@ -1,5 +1,6 @@
 package Main;
 
+import Main.Dialogs.AssignmentDialog;
 import Main.Dialogs.ClassDialog;
 import Main.Models.Assignment;
 import Main.Models.AssignmentType;
@@ -105,12 +106,6 @@ public class Controller {
         typeColumn.prefWidthProperty().bind(assignmentList.widthProperty().multiply(0.25));
         scoreColumn.prefWidthProperty().bind(assignmentList.widthProperty().multiply(0.15));
         gradeColumn.prefWidthProperty().bind(assignmentList.widthProperty().multiply(0.15));
-        typeColumn.setCellValueFactory(new Callback<TableColumn.CellDataFeatures<Assignment, String>, ObservableValue<String>>() {
-            @Override
-            public ObservableValue<String> call(TableColumn.CellDataFeatures<Assignment, String> assignmentTypeStringCellDataFeatures) {
-                return assignmentTypeStringCellDataFeatures.getValue().getType().getName();
-            }
-        });
         
         addClassBtn.hoverProperty().addListener(e -> {
             if (addClassBtn.isHover()) {
@@ -133,7 +128,7 @@ public class Controller {
         classesList.setItems(Datasource.getInstance().getClasses());
         classesList.getSelectionModel().selectFirst();
         Classes selectedClass = classesList.getSelectionModel().getSelectedItem();
-        selectedClass.addAssignment(new Assignment("TypeTest", new AssignmentType("HW",15),
+        selectedClass.addAssignment(new Assignment("TypeTest", "HW",
                 "Test description", 20, 20));
         assignmentList.setItems(selectedClass.getAssignments());
         
@@ -171,6 +166,36 @@ public class Controller {
             Datasource.getInstance().addClass(createdClass);
         }
         classesList.refresh();
+    }
+    
+    @FXML
+    public void addAssignment() {
+        Classes selectedClass = classesList.getSelectionModel().getSelectedItem();
+        
+        Dialog<ButtonType> dialog = new Dialog<>();
+        dialog.initOwner(mainViewMaster.getScene().getWindow());
+        dialog.setTitle("Add an Assignment");
+        dialog.setHeaderText("Fill in the information below and press OK to add a new assignment");
+        FXMLLoader loader = new FXMLLoader();
+        loader.setLocation(getClass().getResource("Dialogs\\AssignmentDialogFXML.fxml"));
+        try {
+            dialog.getDialogPane().setContent(loader.load());
+        } catch (IOException e) {
+            System.out.println("ERROR: Could not load the dialog");
+            e.printStackTrace();
+            return;
+        }
+        AssignmentDialog controller = loader.getController();
+        controller.setComboBox(selectedClass);
+        dialog.getDialogPane().getButtonTypes().add(ButtonType.OK);
+        dialog.getDialogPane().getButtonTypes().add(ButtonType.CANCEL);
+        
+        Optional<ButtonType> result = dialog.showAndWait();
+        if (result.isPresent() && result.get() == ButtonType.OK) {
+            Assignment assignment = controller.addAssignment();
+            selectedClass.addAssignment(assignment);
+        }
+        assignmentList.refresh();
     }
     
     @FXML

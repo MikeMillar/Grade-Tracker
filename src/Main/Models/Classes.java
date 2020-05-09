@@ -10,7 +10,7 @@ public class Classes {
     private String name;
     private String professor;
     private String courseNumber;
-    private ArrayList<AssignmentType> assignmentTypes;
+    private ObservableList<AssignmentType> assignmentTypes;
     private final ObservableList<Assignment> assignments;
     private int pointsEarned;
     private int maxPoints;
@@ -21,13 +21,14 @@ public class Classes {
         this.courseNumber = courseNumber;
         setName(name);
         setProfessor(professor);
+        assignmentTypes = FXCollections.observableArrayList();
         createAssignmentTypes(types);
         this.assignments = FXCollections.observableArrayList();
     }
     
     private void createAssignmentTypes(String text) {
         String[] typeSplit = text.split(",");
-        ArrayList<AssignmentType> types = new ArrayList<>();
+        ObservableList<AssignmentType> types = FXCollections.observableArrayList();
         for (String s: typeSplit) {
             String[] values = s.split(":");
             AssignmentType type = new AssignmentType();
@@ -43,9 +44,9 @@ public class Classes {
         setAssignmentTypes(types);
     }
     
-    private void setAssignmentTypes(ArrayList<AssignmentType> types) {
+    private void setAssignmentTypes(ObservableList<AssignmentType> types) {
         if (types != null && types.size() > 0) {
-            this.assignmentTypes = types;
+            this.assignmentTypes.setAll(types);
         } else {
             System.out.println("Invalid assignment types. Enter valid types.");
         }
@@ -59,7 +60,7 @@ public class Classes {
         return professor;
     }
     
-    public ArrayList<AssignmentType> getAssignmentTypes() {
+    public ObservableList<AssignmentType> getAssignmentTypes() {
         return assignmentTypes;
     }
     

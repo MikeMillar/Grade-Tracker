@@ -3,7 +3,7 @@ package Main.Models;
 public class Assignment {
     
     private String name;
-    private AssignmentType type;
+    private String type;
     private String description;
     private int maxPoints;
     private int pointsEarned;
@@ -11,7 +11,7 @@ public class Assignment {
     private char grade;
     private String scoreString;
     
-    public Assignment(String name, AssignmentType type, String description, int maxPoints, int pointsEarned) {
+    public Assignment(String name, String type, String description, int maxPoints, int pointsEarned) {
         setName(name);
         setType(type);
         setDescription(description);
@@ -47,11 +47,11 @@ public class Assignment {
         }
     }
     
-    public AssignmentType getType() {
+    public String getType() {
         return type;
     }
     
-    public void setType(AssignmentType type) {
+    public void setType(String type) {
         this.type = type;
     }
     
