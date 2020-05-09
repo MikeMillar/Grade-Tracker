@@ -110,9 +110,7 @@ public class Controller {
                 new Classes("TEST153","TestCourse", "Test Prof", "HW:15")
         );
         
-        Task<ObservableList<Classes>> task = new GetClassListTask();
-        classesList.itemsProperty().bind(task.valueProperty());
-        new Thread(task).start();
+        classesList.setItems(Datasource.getInstance().getClasses());
     }
     
     @FXML
@@ -147,15 +145,5 @@ public class Controller {
     public void refresh() {
         classesList.refresh();
         assignmentList.refresh();
-    }
-}
-
-
-class GetClassListTask extends Task {
-    
-    @Override
-    protected ObservableList<Classes> call() throws Exception {
-        return FXCollections.observableArrayList(
-                Datasource.getInstance().getClasses());
     }
 }
