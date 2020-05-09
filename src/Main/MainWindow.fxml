@@ -9,12 +9,13 @@
 <?import javafx.scene.paint.*?>
 <?import javafx.scene.text.*?>
 
-<VBox prefHeight="600.0" prefWidth="900.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Main.Controller">
+<VBox fx:id="mainViewMaster" prefHeight="600.0" prefWidth="900.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Main.Controller">
   <children>
     <MenuBar fx:id="menuBar" VBox.vgrow="NEVER">
       <menus>
         <Menu fx:id="fileMenu" mnemonicParsing="false" text="File">
           <items>
+            <MenuItem fx:id="fmRefresh" onAction="#refresh" text="Refresh"/>
             <MenuItem fx:id="fmNew" mnemonicParsing="false" text="New" />
             <MenuItem fx:id="fmOpen" mnemonicParsing="false" text="Open…" />
             <Menu fx:id="fmOpenRecent" mnemonicParsing="false" text="Open Recent" />

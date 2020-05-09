@@ -5,6 +5,9 @@ public class AssignmentType {
     private String name;
     private double weight;
     
+    
+    public AssignmentType() { }
+    
     public AssignmentType(String name, double weight) {
         setName(name);
         setWeight(weight);

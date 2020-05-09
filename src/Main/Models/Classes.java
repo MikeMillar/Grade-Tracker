@@ -6,6 +6,7 @@ public class Classes {
     
     private String name;
     private String professor;
+    private String courseNumber;
     private ArrayList<AssignmentType> assignmentTypes;
     private final ArrayList<Assignment> assignments;
     private int pointsEarned;
@@ -13,11 +14,30 @@ public class Classes {
     private double percent;
     private char letterGrade;
     
-    public Classes(String name, String professor) {
+    public Classes(String courseNumber, String name, String professor, String types) {
+        this.courseNumber = courseNumber;
         setName(name);
         setProfessor(professor);
-        this.assignmentTypes = new ArrayList<>();
+        createAssignmentTypes(types);
         this.assignments = new ArrayList<>();
+    }
+    
+    private void createAssignmentTypes(String text) {
+        String[] typeSplit = text.split(",");
+        ArrayList<AssignmentType> types = new ArrayList<>();
+        for (String s: typeSplit) {
+            String[] values = s.split(":");
+            AssignmentType type = new AssignmentType();
+            type.setName(values[0]);
+            try {
+                type.setWeight(Double.parseDouble(values[1]));
+                types.add(type);
+            } catch (NumberFormatException e) {
+                System.out.println("Invalid Number Format Passed for assignment weight");
+                e.printStackTrace();
+            }
+        }
+        setAssignmentTypes(types);
     }
     
     private void setAssignmentTypes(ArrayList<AssignmentType> types) {
@@ -58,6 +78,14 @@ public class Classes {
     
     public double getPercent() {
         return percent;
+    }
+    
+    public String getCourseNumber() {
+        return courseNumber;
+    }
+    
+    public void setCourseNumber(String courseNumber) {
+        this.courseNumber = courseNumber;
     }
     
     public void setName(String name) {
