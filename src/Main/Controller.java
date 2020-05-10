@@ -84,7 +84,7 @@ public class Controller {
     // Detail Sub-Items
     @FXML private HBox detailsTitleHbox;
     @FXML private Label detailsLabel;
-    @FXML private ListView detailList; // Add type to view
+    @FXML private ListView<String> detailList; // Add type to view
     
     // Lists
     public ArrayList<Classes> classesArrayList;
@@ -92,16 +92,28 @@ public class Controller {
     
     
     public void initialize() {
+        mainSplitPane.setFocusTraversable(false);
+        
+        // Bind Height Values
+        classesList.prefHeightProperty().bind(Main.stage.heightProperty()
+                .subtract(menuBar.getHeight() + classesTitleHbox.getHeight() + 100));
+        assignmentList.prefHeightProperty().bind(Main.stage.heightProperty()
+                .subtract(menuBar.getHeight() + assignmentTitleHbox.getHeight() + 90));
+        detailList.prefHeightProperty().bind(Main.stage.heightProperty()
+                .subtract(menuBar.getHeight() + detailsTitleHbox.getHeight() + 100));
+        
+        // Bind Width Values
         classesAnchorPane.maxWidthProperty().bind(mainSplitPane.widthProperty().multiply(0.25));
         classesAnchorPane.minWidthProperty().bind(mainSplitPane.widthProperty().multiply(0.15));
         detailsAnchorPane.maxWidthProperty().bind(mainSplitPane.widthProperty().multiply(0.25));
         detailsAnchorPane.minWidthProperty().bind(mainSplitPane.widthProperty().multiply(0.15));
         assignmentsAnchorPane.maxWidthProperty().bind(mainSplitPane.widthProperty().multiply(0.7));
         assignmentsAnchorPane.minWidthProperty().bind(mainSplitPane.widthProperty().multiply(0.5));
-        classesList.prefHeightProperty().bind(classesAnchorPane.heightProperty().subtract(40));
-        classesList.prefWidthProperty().bind(classesAnchorPane.widthProperty().add(15));
-        assignmentList.prefWidthProperty().bind(assignmentsAnchorPane.widthProperty());
         
+        classesList.prefWidthProperty().bind(classesAnchorPane.widthProperty().add(15));
+        detailList.prefWidthProperty().bind(detailsAnchorPane.widthProperty().add(15));
+        
+        assignmentList.prefWidthProperty().bind(assignmentsAnchorPane.widthProperty());
         assignmentColumn.prefWidthProperty().bind(assignmentList.widthProperty().multiply(0.45));
         typeColumn.prefWidthProperty().bind(assignmentList.widthProperty().multiply(0.25));
         scoreColumn.prefWidthProperty().bind(assignmentList.widthProperty().multiply(0.15));
@@ -122,16 +134,23 @@ public class Controller {
             }
         });
         
-        Datasource.getInstance().addClass(
-                new Classes("TEST153","TestCourse", "Test Prof", "HW:15")
-        );
+        ObservableList<String> detailTest = FXCollections.observableArrayList();
+        
+        for (int i = 0; i < 50; i++) {
+            Classes addClass = new Classes("TEST-Class", "TestCourse " + i, "Test Prof", "HW:15");
+            Datasource.getInstance().addClass(addClass);
+            for (int j = 0; j < 50; j++) {
+                addClass.addAssignment(new Assignment("TypeTest" + j, "HW",
+                        "Test description", 20, 20));
+            }
+            detailTest.add("Test" + i);
+        }
         classesList.setItems(Datasource.getInstance().getClasses());
         classesList.getSelectionModel().selectFirst();
         Classes selectedClass = classesList.getSelectionModel().getSelectedItem();
-        selectedClass.addAssignment(new Assignment("TypeTest", "HW",
-                "Test description", 20, 20));
-        assignmentList.setItems(selectedClass.getAssignments());
         
+        assignmentList.setItems(selectedClass.getAssignments());
+        detailList.setItems(detailTest);
         classesList.getSelectionModel().selectedItemProperty().addListener(new ChangeListener<Classes>() {
             @Override
             public void changed(ObservableValue<? extends Classes> observableValue, Classes classes, Classes t1) {

@@ -17,7 +17,7 @@
                 <TextField fx:id="professorNameField" GridPane.rowIndex="2" GridPane.columnIndex="2" GridPane.columnSpan="2"/>
                 <Label text="Assignment Types:" GridPane.rowIndex="3" GridPane.columnIndex="0" GridPane.columnSpan="2"/>
                 <Label text="Add your assignment types (Homework, Quiz, Exam, ect) followed by percent of your overall grade they represent. Use the following format: &quot;Homework:15&quot; where Homework is the type, and it's worth 15% of total grade. Separate each entry with commas"
-                       GridPane.rowIndex="4" GridPane.columnIndex="0" GridPane.columnSpan="4" GridPane.rowSpan="4"/>
+                       GridPane.rowIndex="4" GridPane.columnIndex="0" GridPane.columnSpan="4" GridPane.rowSpan="4" wrapText="true"/>
                 <TextField fx:id="assignmentTypeField" GridPane.rowIndex="9" GridPane.columnIndex="0" GridPane.columnSpan="4"/>
             </GridPane>
         </HBox>
