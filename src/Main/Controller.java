@@ -33,7 +33,6 @@ public class Controller {
     
     // File Menu
     @FXML private Menu fileMenu;
-    @FXML private MenuItem fmRefresh;
     @FXML private MenuItem fmNew;
     @FXML private MenuItem fmOpen;
     @FXML private MenuItem fmOpenRecent;
@@ -214,12 +213,6 @@ public class Controller {
             Assignment assignment = controller.addAssignment();
             selectedClass.addAssignment(assignment);
         }
-        assignmentList.refresh();
-    }
-    
-    @FXML
-    public void refresh() {
-        classesList.refresh();
         assignmentList.refresh();
     }
 }
