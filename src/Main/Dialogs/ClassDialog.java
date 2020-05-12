@@ -20,5 +20,19 @@ public class ClassDialog {
        return new Classes(num, course, prof, types);
    }
    
+   public void loadClass(Classes selected) {
+       courseNumField.setText(selected.getCourseNumber());
+       courseNameField.setText(selected.getName());
+       professorNameField.setText(selected.getProfessor());
+       assignmentTypeField.setText(selected.getTypeString());
+   }
+   
+   public void updateClass(Classes selected) {
+       selected.setCourseNumber(courseNumField.getText());
+       selected.setName(courseNameField.getText());
+       selected.setProfessor(professorNameField.getText());
+       selected.createAssignmentTypes(assignmentTypeField.getText());
+   }
+   
    
 }

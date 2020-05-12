@@ -39,5 +39,21 @@ public class AssignmentDialog  {
         String description = descriptionArea.getText();
         return new Assignment(name, type, description, max, earned);
     }
+    
+    public void loadAssignment(Assignment selected) {
+        assignmentNameField.setText(selected.getName());
+        assignmentTypeComboBox.getSelectionModel().select(selected.getType());
+        earnedPointsField.setText("" + selected.getPointsEarned());
+        maxPointsField.setText("" + selected.getMaxPoints());
+        descriptionArea.setText(selected.getDescription());
+    }
+    
+    public void updateAssignment(Assignment selected) {
+        selected.setName(assignmentNameField.getText());
+        selected.setType(assignmentTypeComboBox.getSelectionModel().getSelectedItem());
+        selected.setPointsEarned(Integer.parseInt(earnedPointsField.getText()));
+        selected.setMaxPoints(Integer.parseInt(maxPointsField.getText()));
+        selected.setDescription(descriptionArea.getText());
+    }
 
 }

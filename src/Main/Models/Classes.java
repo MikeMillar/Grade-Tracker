@@ -26,7 +26,7 @@ public class Classes {
         this.assignments = FXCollections.observableArrayList();
     }
     
-    private void createAssignmentTypes(String text) {
+    public void createAssignmentTypes(String text) {
         String[] typeSplit = text.split(",");
         ObservableList<AssignmentType> types = FXCollections.observableArrayList();
         for (String s: typeSplit) {
@@ -62,6 +62,19 @@ public class Classes {
     
     public ObservableList<AssignmentType> getAssignmentTypes() {
         return assignmentTypes;
+    }
+    
+    public String getTypeString() {
+        StringBuilder sb = new StringBuilder();
+        for (int i = 0; i < assignmentTypes.size(); i++) {
+            sb.append(assignmentTypes.get(i).getName().get());
+            sb.append(':');
+            sb.append(assignmentTypes.get(i).getWeight());
+            if (i < assignmentTypes.size() - 1) {
+                sb.append(',');
+            }
+        }
+        return sb.toString();
     }
     
     public ObservableList<Assignment> getAssignments() {

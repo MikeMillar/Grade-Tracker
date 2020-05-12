@@ -141,15 +141,17 @@ public class Controller {
     
         ObservableList<String> detailTest = FXCollections.observableArrayList();
         
-        for (int i = 0; i < 50; i++) {
-            Classes addClass = new Classes("TEST-Class", "TestCourse " + i, "Test Prof", "HW:15");
-            Datasource.getInstance().addClass(addClass);
-            for (int j = 0; j < 50; j++) {
-                addClass.addAssignment(new Assignment("TypeTest" + j, "HW",
-                        "Test description", 20, 20));
-            }
-            detailTest.add("Test" + i);
-        }
+//        // Test Data Seeding
+//        for (int i = 0; i < 50; i++) {
+//            Classes addClass = new Classes("TEST-Class", "TestCourse " + i, "Test Prof", "HW:15");
+//            Datasource.getInstance().addClass(addClass);
+//            for (int j = 0; j < 50; j++) {
+//                addClass.addAssignment(new Assignment("TypeTest" + j, "HW",
+//                        "Test description", 20, 20));
+//            }
+//            detailTest.add("Test" + i);
+//        }
+        
         classesList.setItems(Datasource.getInstance().getClasses());
         classesList.getSelectionModel().selectFirst();
         Classes selectedClass = classesList.getSelectionModel().getSelectedItem();
@@ -193,6 +195,49 @@ public class Controller {
     }
     
     @FXML
+    public void editClass() {
+        Classes selected = classesList.getSelectionModel().getSelectedItem();
+        
+        Dialog<ButtonType> dialog = new Dialog<>();
+        dialog.initOwner(mainViewMaster.getScene().getWindow());
+        dialog.setTitle("Edit an Existing Course");
+        dialog.setHeaderText("Fill in the information below and press OK to edit the class");
+        FXMLLoader classLoader = new FXMLLoader();
+        classLoader.setLocation(getClass().getResource("Dialogs\\ClassDialogFXML.fxml"));
+        try {
+            dialog.getDialogPane().setContent(classLoader.load());
+        } catch (IOException e) {
+            System.out.println("ERROR: Could not load the dialog");
+            e.printStackTrace();
+            return;
+        }
+    
+        ClassDialog controller = classLoader.getController();
+        controller.loadClass(selected);
+    
+        dialog.getDialogPane().getButtonTypes().add(ButtonType.OK);
+        dialog.getDialogPane().getButtonTypes().add(ButtonType.CANCEL);
+    
+        Optional<ButtonType> result = dialog.showAndWait();
+        if (result.isPresent() && result.get() == ButtonType.OK) {
+            controller.updateClass(selected);
+        }
+        classesList.refresh();
+    }
+    
+    @FXML void deleteClass() {
+        Classes selected = classesList.getSelectionModel().getSelectedItem();
+        Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
+        alert.setTitle("Delete Class");
+        alert.setHeaderText("Are you sure you want to delete " + selected + "?");
+        Optional<ButtonType> result = alert.showAndWait();
+        if (result.isPresent() && result.get() == ButtonType.OK) {
+            Datasource.getInstance().removeClass(selected);
+        }
+        classesList.refresh();
+    }
+    
+    @FXML
     public void addAssignment() {
         Classes selectedClass = classesList.getSelectionModel().getSelectedItem();
         
@@ -220,5 +265,51 @@ public class Controller {
             selectedClass.addAssignment(assignment);
         }
         assignmentList.refresh();
+    }
+    
+    @FXML
+    public void editAssignment() {
+        Classes selectedClass = classesList.getSelectionModel().getSelectedItem();
+        Assignment selectedAssignment = assignmentList.getSelectionModel().getSelectedItem();
+    
+        Dialog<ButtonType> dialog = new Dialog<>();
+        dialog.initOwner(mainViewMaster.getScene().getWindow());
+        dialog.setTitle("Edit an Assignment");
+        dialog.setHeaderText("Fill in the information below and press OK to edit the assignment");
+        FXMLLoader loader = new FXMLLoader();
+        loader.setLocation(getClass().getResource("Dialogs\\AssignmentDialogFXML.fxml"));
+        try {
+            dialog.getDialogPane().setContent(loader.load());
+        } catch (IOException e) {
+            System.out.println("ERROR: Could not load the dialog");
+            e.printStackTrace();
+            return;
+        }
+        AssignmentDialog controller = loader.getController();
+        controller.setComboBox(selectedClass);
+        
+        controller.loadAssignment(selectedAssignment);
+        
+        dialog.getDialogPane().getButtonTypes().add(ButtonType.OK);
+        dialog.getDialogPane().getButtonTypes().add(ButtonType.CANCEL);
+    
+        Optional<ButtonType> result = dialog.showAndWait();
+        if (result.isPresent() && result.get() == ButtonType.OK) {
+            controller.updateAssignment(selectedAssignment);
+        }
+        assignmentList.refresh();
+    }
+    
+    @FXML
+    public void deleteAssignment() {
+        Classes selectedClass = classesList.getSelectionModel().getSelectedItem();
+        Assignment selectedAssignment = assignmentList.getSelectionModel().getSelectedItem();
+        Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
+        alert.setTitle("Delete Assignment");
+        alert.setHeaderText("Are you sure you want to delete " + selectedAssignment.getName() + "?");
+        Optional<ButtonType> result = alert.showAndWait();
+        if (result.isPresent() && result.get() == ButtonType.OK) {
+            selectedClass.deleteAssignment(selectedAssignment);
+        }
     }
 }
