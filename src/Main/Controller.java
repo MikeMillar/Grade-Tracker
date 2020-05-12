@@ -2,10 +2,7 @@ package Main;
 
 import Main.Dialogs.AssignmentDialog;
 import Main.Dialogs.ClassDialog;
-import Main.Models.Assignment;
-import Main.Models.AssignmentType;
-import Main.Models.Classes;
-import Main.Models.Datasource;
+import Main.Models.*;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
@@ -20,9 +17,12 @@ import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.util.Callback;
 
+import java.awt.event.MouseEvent;
 import java.io.IOException;
+import java.lang.reflect.Method;
 import java.util.ArrayList;
 import java.util.Optional;
+import java.util.function.Function;
 
 public class Controller {
 
@@ -68,12 +68,16 @@ public class Controller {
     @FXML private HBox classesTitleHbox;
     @FXML private Label classesLabel;
     @FXML private Button addClassBtn;
+    @FXML private Button editClassBtn;
+    @FXML private Button deleteClassBtn;
     @FXML private ListView<Classes> classesList;
     
     // Assignment Sub-Items
     @FXML private HBox assignmentTitleHbox;
     @FXML private Label assignmentLabel;
     @FXML private Button addAssignmentBtn;
+    @FXML private Button editAssignmentBtn;
+    @FXML private Button deleteAssignmentBtn;
     @FXML private TableView<Assignment> assignmentList;
     @FXML private TableColumn<Assignment, String> assignmentColumn;
     @FXML private TableColumn<Assignment, String> typeColumn;
@@ -118,21 +122,23 @@ public class Controller {
         scoreColumn.prefWidthProperty().bind(assignmentList.widthProperty().multiply(0.15));
         gradeColumn.prefWidthProperty().bind(assignmentList.widthProperty().multiply(0.15));
         
-        addClassBtn.hoverProperty().addListener(e -> {
-            if (addClassBtn.isHover()) {
-                addClassBtn.setStyle("-fx-font-weight:bold;");
-            } else {
-                addClassBtn.setStyle("-fx-background-color:transparent;");
-            }
-        });
-        addAssignmentBtn.hoverProperty().addListener(e -> {
-            if (addAssignmentBtn.isHover()) {
-                addAssignmentBtn.setStyle("-fx-font-weight:bold;");
-            } else {
-                addAssignmentBtn.setStyle("-fx-background-color:transparent;");
-            }
-        });
         
+        
+        addClassBtn.setOnMouseEntered(e -> addClassBtn.setStyle("-fx-font-weight:bold;"));
+        addClassBtn.setOnMouseExited(e -> addClassBtn.setStyle("-fx-background-color:transparent;"));
+        editClassBtn.setOnMouseEntered(e -> editClassBtn.setStyle("-fx-font-weight:bold;"));
+        editClassBtn.setOnMouseExited(e -> editClassBtn.setStyle("-fx-background-color:transparent;"));
+        deleteClassBtn.setOnMouseEntered(e -> deleteClassBtn.setStyle("-fx-font-weight:bold;"));
+        deleteClassBtn.setOnMouseExited(e -> deleteClassBtn.setStyle("-fx-background-color:transparent;"));
+        addAssignmentBtn.setOnMouseEntered(e -> addAssignmentBtn.setStyle("-fx-font-weight:bold;"));
+        addAssignmentBtn.setOnMouseExited(e -> addAssignmentBtn.setStyle("-fx-background-color:transparent;"));
+        editAssignmentBtn.setOnMouseEntered(e -> editAssignmentBtn.setStyle("-fx-font-weight:bold;"));
+        editAssignmentBtn.setOnMouseExited(e -> editAssignmentBtn.setStyle("-fx-background-color:transparent;"));
+        deleteAssignmentBtn.setOnMouseEntered(e -> deleteAssignmentBtn.setStyle("-fx-font-weight:bold;"));
+        deleteAssignmentBtn.setOnMouseExited(e -> deleteAssignmentBtn.setStyle("-fx-background-color:transparent;"));
+    
+    
+    
         ObservableList<String> detailTest = FXCollections.observableArrayList();
         
         for (int i = 0; i < 50; i++) {
