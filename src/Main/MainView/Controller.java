@@ -1,4 +1,4 @@
-package Main;
+package Main.MainView;
 
 import Main.Dialogs.AssignmentDialog;
 import Main.Dialogs.ClassDialog;
@@ -11,18 +11,13 @@ import javafx.concurrent.Task;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.control.*;
-import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
-import javafx.util.Callback;
 
-import java.awt.event.MouseEvent;
 import java.io.IOException;
-import java.lang.reflect.Method;
 import java.util.ArrayList;
 import java.util.Optional;
-import java.util.function.Function;
 
 public class Controller {
 
@@ -155,8 +150,9 @@ public class Controller {
         classesList.setItems(Datasource.getInstance().getClasses());
         classesList.getSelectionModel().selectFirst();
         Classes selectedClass = classesList.getSelectionModel().getSelectedItem();
-        
-        assignmentList.setItems(selectedClass.getAssignments());
+        if (selectedClass != null) {
+            assignmentList.setItems(selectedClass.getAssignments());
+        }
         detailList.setItems(detailTest);
         classesList.getSelectionModel().selectedItemProperty().addListener(new ChangeListener<Classes>() {
             @Override
@@ -173,7 +169,7 @@ public class Controller {
         dialog.setTitle("Add a New Course");
         dialog.setHeaderText("Fill in the information below and press OK to add a new class");
         FXMLLoader classLoader = new FXMLLoader();
-        classLoader.setLocation(getClass().getResource("Dialogs\\ClassDialogFXML.fxml"));
+        classLoader.setLocation(getClass().getResource("\\Dialogs\\ClassDialogFXML.fxml"));
         try {
             dialog.getDialogPane().setContent(classLoader.load());
         } catch (IOException e) {
@@ -203,7 +199,7 @@ public class Controller {
         dialog.setTitle("Edit an Existing Course");
         dialog.setHeaderText("Fill in the information below and press OK to edit the class");
         FXMLLoader classLoader = new FXMLLoader();
-        classLoader.setLocation(getClass().getResource("Dialogs\\ClassDialogFXML.fxml"));
+        classLoader.setLocation(getClass().getResource("src\\Main\\Dialogs\\ClassDialogFXML.fxml"));
         try {
             dialog.getDialogPane().setContent(classLoader.load());
         } catch (IOException e) {
@@ -246,7 +242,7 @@ public class Controller {
         dialog.setTitle("Add an Assignment");
         dialog.setHeaderText("Fill in the information below and press OK to add a new assignment");
         FXMLLoader loader = new FXMLLoader();
-        loader.setLocation(getClass().getResource("Dialogs\\AssignmentDialogFXML.fxml"));
+        loader.setLocation(getClass().getResource("src\\Main\\Dialogs\\AssignmentDialogFXML.fxml"));
         try {
             dialog.getDialogPane().setContent(loader.load());
         } catch (IOException e) {
@@ -277,7 +273,7 @@ public class Controller {
         dialog.setTitle("Edit an Assignment");
         dialog.setHeaderText("Fill in the information below and press OK to edit the assignment");
         FXMLLoader loader = new FXMLLoader();
-        loader.setLocation(getClass().getResource("Dialogs\\AssignmentDialogFXML.fxml"));
+        loader.setLocation(getClass().getResource("src\\Main\\Dialogs\\AssignmentDialogFXML.fxml"));
         try {
             dialog.getDialogPane().setContent(loader.load());
         } catch (IOException e) {

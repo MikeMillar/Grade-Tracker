@@ -1,5 +1,6 @@
-package Main;
+package Main.MainView;
 
+import Main.Models.Datasource;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -16,13 +17,24 @@ public class Main extends Application {
     @Override
     public void start(Stage primaryStage) throws Exception{
         stage = primaryStage;
-        Parent root = FXMLLoader.load(getClass().getResource("MainWindow.fxml"));
+        FXMLLoader loader = new FXMLLoader();
+        loader.setLocation(getClass().getResource("MainWindow.fxml"));
+        Parent root = loader.load();
         primaryStage.setTitle("Grade Tracker");
         primaryStage.setScene(new Scene(root, size.width, size.height));
         primaryStage.show();
     }
-
-
+    
+    @Override
+    public void init() throws Exception {
+//        Datasource.getInstance().load();
+    }
+    
+    @Override
+    public void stop() throws Exception {
+        Datasource.getInstance().save();
+    }
+    
     public static void main(String[] args) {
         launch(args);
     }
