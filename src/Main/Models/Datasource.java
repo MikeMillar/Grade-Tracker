@@ -2,6 +2,8 @@ package Main.Models;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import org.apache.commons.lang.StringEscapeUtils;
+import org.apache.commons.lang.WordUtils;
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
 import org.w3c.dom.Node;
@@ -51,6 +53,10 @@ public class Datasource {
         classes.remove(classes1);
     }
     
+    public String escapeText(String input) {
+        return StringEscapeUtils.escapeXml(input);
+    }
+    
     public boolean save() {
         // TODO - Save under username hashcode (Implement users)
         if (classes.size() == 0) {
@@ -60,33 +66,33 @@ public class Datasource {
         
         String user = "michael_millar";
         int userHash = user.hashCode();
-        String filePath = "E:\\Programming Projects\\Java\\Grade-Tracker\\SaveData\\" + userHash;
+        String filePath = "E:\\Programming Projects\\Java\\Grade-Tracker\\SaveData\\" + userHash + ".xml";
         try {
             DocumentBuilderFactory dbf = DocumentBuilderFactory.newInstance();
             DocumentBuilder db = dbf.newDocumentBuilder();
             Document doc = db.newDocument();
             
-            Element root = doc.createElement("" + userHash);
+            Element root = doc.createElement(user);
             doc.appendChild(root);
             
             for (Classes c: classes) {
                 Element courseElement = doc.createElement("Course");
                 root.appendChild(courseElement);
-                
-                Element courseNumber = doc.createElement("CourseNumber");
-                courseElement.appendChild(doc.createTextNode(c.getCourseNumber()));
-                courseElement.appendChild(courseNumber);
+    
+                Element CourseNumber = doc.createElement("CourseNumber");
+                CourseNumber.appendChild(doc.createTextNode(escapeText(c.getCourseNumber())));
+                courseElement.appendChild(CourseNumber);
                 
                 Element courseName = doc.createElement("CourseName");
-                courseName.appendChild(doc.createTextNode(c.getName()));
+                courseName.appendChild(doc.createTextNode(escapeText(c.getName())));
                 courseElement.appendChild(courseName);
                 
                 Element professor = doc.createElement("Professor");
-                professor.appendChild(doc.createTextNode(c.getProfessor()));
+                professor.appendChild(doc.createTextNode(escapeText(c.getProfessor())));
                 courseElement.appendChild(professor);
                 
                 Element types = doc.createElement("AssignmentTypes");
-                types.appendChild(doc.createTextNode(c.getTypeString()));
+                types.appendChild(doc.createTextNode(escapeText(c.getTypeString())));
                 courseElement.appendChild(types);
                 
                 for (Assignment a: c.getAssignments()) {
@@ -94,19 +100,19 @@ public class Datasource {
                     courseElement.appendChild(assignment);
                     
                     Element assignmentName = doc.createElement("AssignmentName");
-                    assignmentName.appendChild(doc.createTextNode(a.getName()));
+                    assignmentName.appendChild(doc.createTextNode(escapeText(a.getName())));
                     assignment.appendChild(assignmentName);
                     
                     Element aType = doc.createElement("AssignmentType");
-                    aType.appendChild(doc.createTextNode(a.getType()));
+                    aType.appendChild(doc.createTextNode(escapeText(a.getType())));
                     assignment.appendChild(aType);
                     
                     Element description = doc.createElement("AssignmentDescription");
-                    description.appendChild(doc.createTextNode(a.getDescription()));
+                    description.appendChild(doc.createTextNode(escapeText(a.getDescription())));
                     assignment.appendChild(description);
                     
                     Element points = doc.createElement("Points");
-                    points.appendChild(doc.createTextNode(a.getScoreString()));
+                    points.appendChild(doc.createTextNode(escapeText(a.getScoreString())));
                     assignment.appendChild(points);
                 }
             }
@@ -114,8 +120,7 @@ public class Datasource {
             TransformerFactory tf = TransformerFactory.newInstance();
             Transformer transformer = tf.newTransformer();
             DOMSource source = new DOMSource(doc);
-            StreamResult result = new StreamResult(
-                    new File(filePath));
+            StreamResult result = new StreamResult(new File(filePath));
             transformer.transform(source, result);
     
             System.out.println("File saved!");
@@ -131,7 +136,7 @@ public class Datasource {
         
         String user = "michael_millar";
         int userHash = user.hashCode();
-        String filePath = "E:\\Programming Projects\\Java\\Grade-Tracker\\SaveData\\" + userHash;
+        String filePath = "E:\\Programming Projects\\Java\\Grade-Tracker\\SaveData\\" + userHash + ".xml";
         
         try {
             File file = new File(filePath);
