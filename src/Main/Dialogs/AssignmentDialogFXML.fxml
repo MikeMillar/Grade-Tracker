@@ -1,0 +1,27 @@
+<?import javafx.scene.control.DialogPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.control.ComboBox?>
+<?import javafx.scene.control.TextArea?>
+<DialogPane xmlns="http://javafx.com/javafx" xmlns:fx="http://javafx.com/fxml"
+            fx:controller="Main.Dialogs.AssignmentDialog"
+            prefWidth="400.0" prefHeight="400.0">
+    <content>
+        <HBox>
+            <GridPane>
+                <Label text="Assignment Name:" GridPane.rowIndex="0" GridPane.columnIndex="0" GridPane.columnSpan="2"/>
+                <TextField fx:id="assignmentNameField" GridPane.rowIndex="0" GridPane.columnIndex="2" GridPane.columnSpan="2"/>
+                <Label text="AssignmentType" GridPane.rowIndex="1" GridPane.columnIndex="0" GridPane.columnSpan="2"/>
+                <ComboBox fx:id="assignmentTypeComboBox" GridPane.rowIndex="1" GridPane.columnIndex="2" GridPane.columnSpan="2"/>
+                <Label text="Earned Points:" GridPane.rowIndex="2" GridPane.columnIndex="0" GridPane.columnSpan="2"/>
+                <TextField fx:id="earnedPointsField" GridPane.rowIndex="2" GridPane.columnIndex="2" GridPane.columnSpan="2"/>
+                <Label text="Max Points:" GridPane.rowIndex="3" GridPane.columnIndex="0" GridPane.columnSpan="2"/>
+                <TextField fx:id="maxPointsField" GridPane.rowIndex="3" GridPane.columnIndex="2" GridPane.columnSpan="2"/>
+                <Label text="Description" GridPane.rowIndex="4" GridPane.columnIndex="0" GridPane.columnSpan="4"/>
+                <TextArea fx:id="descriptionArea" GridPane.rowIndex="5" GridPane.columnIndex="0" GridPane.columnSpan="4" GridPane.rowSpan="4"/>
+            </GridPane>
+        </HBox>
+    </content>
+</DialogPane>
