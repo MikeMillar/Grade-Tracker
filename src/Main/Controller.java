@@ -152,11 +152,12 @@ public class Controller {
         Classes selectedClass = classesList.getSelectionModel().getSelectedItem();
         if (selectedClass != null) {
             assignmentList.setItems(selectedClass.getAssignments());
+            editAssignmentBtn.setDisable(true);
+            deleteAssignmentBtn.setDisable(true);
+        } else {
             editClassBtn.setDisable(true);
             deleteClassBtn.setDisable(true);
             addAssignmentBtn.setDisable(true);
-            editAssignmentBtn.setDisable(true);
-            deleteAssignmentBtn.setDisable(true);
         }
         detailList.setItems(detailTest);
         classesList.getSelectionModel().selectedItemProperty().addListener(new ChangeListener<Classes>() {
@@ -166,6 +167,8 @@ public class Controller {
                 editClassBtn.setDisable(false);
                 deleteClassBtn.setDisable(false);
                 addAssignmentBtn.setDisable(false);
+                editAssignmentBtn.setDisable(true);
+                deleteAssignmentBtn.setDisable(true);
             }
         });
         assignmentList.getSelectionModel().selectedItemProperty().addListener(new ChangeListener<Assignment>() {

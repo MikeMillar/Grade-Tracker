@@ -169,6 +169,8 @@ public class Datasource {
                         String type = a.getElementsByTagName("AssignmentType").item(0).getTextContent();
                         String description = a.getElementsByTagName("AssignmentDescription").item(0).getTextContent();
                         String[] scores = a.getElementsByTagName("Points").item(0).getTextContent().split("/");
+                        scores[0] = scores[0].replaceAll("\\s", "");
+                        scores[1] = scores[1].replaceAll("\\s", "");
                         int earned = Integer.parseInt(scores[0]);
                         int max = Integer.parseInt(scores[1]);
                         Assignment assignment = new Assignment(name, type, description, max, earned);
