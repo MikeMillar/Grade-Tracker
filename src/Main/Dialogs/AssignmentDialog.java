@@ -23,6 +23,9 @@ public class AssignmentDialog  {
     @FXML private TextArea descriptionArea;
     
     public void setComboBox(Classes selectedClass) {
+        if (selectedClass == null) {
+            return;
+        }
         ObservableList<String> types = FXCollections.observableArrayList();
         ObservableList<AssignmentType> classTypes = selectedClass.getAssignmentTypes();
         for (AssignmentType type : classTypes) {
@@ -41,6 +44,9 @@ public class AssignmentDialog  {
     }
     
     public void loadAssignment(Assignment selected) {
+        if (selected == null) {
+            return;
+        }
         assignmentNameField.setText(selected.getName());
         assignmentTypeComboBox.getSelectionModel().select(selected.getType());
         earnedPointsField.setText("" + selected.getPointsEarned());
@@ -49,6 +55,9 @@ public class AssignmentDialog  {
     }
     
     public void updateAssignment(Assignment selected) {
+        if (selected == null) {
+            return;
+        }
         selected.setName(assignmentNameField.getText());
         selected.setType(assignmentTypeComboBox.getSelectionModel().getSelectedItem());
         selected.setPointsEarned(Integer.parseInt(earnedPointsField.getText()));

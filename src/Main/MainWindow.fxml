@@ -11,7 +11,7 @@
 <?import javafx.scene.text.*?>
 <?import javafx.scene.control.cell.PropertyValueFactory?>
 
-<VBox fx:id="mainViewMaster" prefHeight="600.0" prefWidth="900.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Main.MainView.Controller">
+<VBox fx:id="mainViewMaster" prefHeight="600.0" prefWidth="900.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Main.Controller">
   <children>
     <MenuBar fx:id="menuBar" VBox.vgrow="NEVER">
       <menus>
@@ -96,7 +96,7 @@
                            </font></Button>
                      </children>
                   </HBox>
-                  <ListView fx:id="classesList" layoutY="40.0" prefHeight="${classesAnchorPane.height}" prefWidth="${classesAnchorPane.width}" style="-fx-background-color: transparent;" stylesheets="@../StyleSheets/classList.css" />
+                  <ListView fx:id="classesList" layoutY="40.0" prefHeight="${classesAnchorPane.height}" prefWidth="${classesAnchorPane.width}" style="-fx-background-color: transparent;" stylesheets="@StyleSheets/classList.css" />
           </children>
         </AnchorPane>
             <AnchorPane fx:id="assignmentsAnchorPane" layoutX="10.0" layoutY="10.0" prefHeight="${mainSplitPane.height}">
@@ -141,7 +141,7 @@
                            </HBox.margin></Button>
                      </children>
                   </HBox>
-                   <TableView fx:id="assignmentList" layoutY="40.0" prefWidth="418.0" style="-fx-background-color: transparent;" stylesheets="@../StyleSheets/assignmentList.css" VBox.vgrow="ALWAYS">
+                   <TableView fx:id="assignmentList" layoutY="40.0" prefWidth="418.0" style="-fx-background-color: transparent;" stylesheets="@StyleSheets/assignmentList.css" VBox.vgrow="ALWAYS">
                        <columns>
                            <TableColumn fx:id="assignmentColumn" text="Assignment">
                                <cellValueFactory>
@@ -184,7 +184,7 @@
                         </Label>
                      </children>
                   </HBox>
-                  <ListView fx:id="detailList" layoutY="40.0" prefHeight="510.0" prefWidth="248.0" style="-fx-background-color: transparent;" stylesheets="@../StyleSheets/classList.css" />
+                  <ListView fx:id="detailList" layoutY="40.0" prefHeight="510.0" prefWidth="248.0" style="-fx-background-color: transparent;" stylesheets="@StyleSheets/classList.css" />
                </children>
             </AnchorPane>
       </items>

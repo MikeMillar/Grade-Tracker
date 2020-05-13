@@ -21,6 +21,9 @@ public class ClassDialog {
    }
    
    public void loadClass(Classes selected) {
+       if (selected == null) {
+           return;
+       }
        courseNumField.setText(selected.getCourseNumber());
        courseNameField.setText(selected.getName());
        professorNameField.setText(selected.getProfessor());
@@ -28,6 +31,9 @@ public class ClassDialog {
    }
    
    public void updateClass(Classes selected) {
+       if (selected == null) {
+           return;
+       }
        selected.setCourseNumber(courseNumField.getText());
        selected.setName(courseNameField.getText());
        selected.setProfessor(professorNameField.getText());

@@ -1,4 +1,4 @@
-package Main.MainView;
+package Main;
 
 import Main.Models.Datasource;
 import javafx.application.Application;

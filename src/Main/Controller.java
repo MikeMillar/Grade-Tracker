@@ -1,4 +1,4 @@
-package Main.MainView;
+package Main;
 
 import Main.Dialogs.AssignmentDialog;
 import Main.Dialogs.ClassDialog;
@@ -152,12 +152,29 @@ public class Controller {
         Classes selectedClass = classesList.getSelectionModel().getSelectedItem();
         if (selectedClass != null) {
             assignmentList.setItems(selectedClass.getAssignments());
+            editClassBtn.setDisable(true);
+            deleteClassBtn.setDisable(true);
+            addAssignmentBtn.setDisable(true);
+            editAssignmentBtn.setDisable(true);
+            deleteAssignmentBtn.setDisable(true);
         }
         detailList.setItems(detailTest);
         classesList.getSelectionModel().selectedItemProperty().addListener(new ChangeListener<Classes>() {
             @Override
             public void changed(ObservableValue<? extends Classes> observableValue, Classes classes, Classes t1) {
                 assignmentList.setItems(classesList.getSelectionModel().getSelectedItem().getAssignments());
+                editClassBtn.setDisable(false);
+                deleteClassBtn.setDisable(false);
+                addAssignmentBtn.setDisable(false);
+            }
+        });
+        assignmentList.getSelectionModel().selectedItemProperty().addListener(new ChangeListener<Assignment>() {
+            @Override
+            public void changed(ObservableValue<? extends Assignment> observableValue, Assignment assignment, Assignment t1) {
+                if (assignmentList.getSelectionModel().getSelectedItem() != null) {
+                    editAssignmentBtn.setDisable(false);
+                    deleteAssignmentBtn.setDisable(false);
+                }
             }
         });
     }
@@ -169,7 +186,7 @@ public class Controller {
         dialog.setTitle("Add a New Course");
         dialog.setHeaderText("Fill in the information below and press OK to add a new class");
         FXMLLoader classLoader = new FXMLLoader();
-        classLoader.setLocation(getClass().getResource("\\Dialogs\\ClassDialogFXML.fxml"));
+        classLoader.setLocation(getClass().getResource("Dialogs\\ClassDialogFXML.fxml"));
         try {
             dialog.getDialogPane().setContent(classLoader.load());
         } catch (IOException e) {
@@ -193,13 +210,15 @@ public class Controller {
     @FXML
     public void editClass() {
         Classes selected = classesList.getSelectionModel().getSelectedItem();
-        
+        if (selected == null) {
+            return;
+        }
         Dialog<ButtonType> dialog = new Dialog<>();
         dialog.initOwner(mainViewMaster.getScene().getWindow());
         dialog.setTitle("Edit an Existing Course");
         dialog.setHeaderText("Fill in the information below and press OK to edit the class");
         FXMLLoader classLoader = new FXMLLoader();
-        classLoader.setLocation(getClass().getResource("src\\Main\\Dialogs\\ClassDialogFXML.fxml"));
+        classLoader.setLocation(getClass().getResource("Dialogs\\ClassDialogFXML.fxml"));
         try {
             dialog.getDialogPane().setContent(classLoader.load());
         } catch (IOException e) {
@@ -223,6 +242,9 @@ public class Controller {
     
     @FXML void deleteClass() {
         Classes selected = classesList.getSelectionModel().getSelectedItem();
+        if (selected == null) {
+            return;
+        }
         Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
         alert.setTitle("Delete Class");
         alert.setHeaderText("Are you sure you want to delete " + selected + "?");
@@ -236,13 +258,15 @@ public class Controller {
     @FXML
     public void addAssignment() {
         Classes selectedClass = classesList.getSelectionModel().getSelectedItem();
-        
+        if (selectedClass == null) {
+            return;
+        }
         Dialog<ButtonType> dialog = new Dialog<>();
         dialog.initOwner(mainViewMaster.getScene().getWindow());
         dialog.setTitle("Add an Assignment");
         dialog.setHeaderText("Fill in the information below and press OK to add a new assignment");
         FXMLLoader loader = new FXMLLoader();
-        loader.setLocation(getClass().getResource("src\\Main\\Dialogs\\AssignmentDialogFXML.fxml"));
+        loader.setLocation(getClass().getResource("Dialogs\\AssignmentDialogFXML.fxml"));
         try {
             dialog.getDialogPane().setContent(loader.load());
         } catch (IOException e) {
@@ -267,13 +291,15 @@ public class Controller {
     public void editAssignment() {
         Classes selectedClass = classesList.getSelectionModel().getSelectedItem();
         Assignment selectedAssignment = assignmentList.getSelectionModel().getSelectedItem();
-    
+        if (selectedClass == null || selectedAssignment == null) {
+            return;
+        }
         Dialog<ButtonType> dialog = new Dialog<>();
         dialog.initOwner(mainViewMaster.getScene().getWindow());
         dialog.setTitle("Edit an Assignment");
         dialog.setHeaderText("Fill in the information below and press OK to edit the assignment");
         FXMLLoader loader = new FXMLLoader();
-        loader.setLocation(getClass().getResource("src\\Main\\Dialogs\\AssignmentDialogFXML.fxml"));
+        loader.setLocation(getClass().getResource("Dialogs\\AssignmentDialogFXML.fxml"));
         try {
             dialog.getDialogPane().setContent(loader.load());
         } catch (IOException e) {
@@ -300,6 +326,9 @@ public class Controller {
     public void deleteAssignment() {
         Classes selectedClass = classesList.getSelectionModel().getSelectedItem();
         Assignment selectedAssignment = assignmentList.getSelectionModel().getSelectedItem();
+        if (selectedClass == null || selectedAssignment == null) {
+            return;
+        }
         Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
         alert.setTitle("Delete Assignment");
         alert.setHeaderText("Are you sure you want to delete " + selectedAssignment.getName() + "?");
