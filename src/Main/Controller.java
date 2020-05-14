@@ -101,19 +101,19 @@ public class Controller {
                 .subtract(menuBar.getHeight() + detailsTitleHbox.getHeight() + 100));
         
         // Bind Width Values
-        classesAnchorPane.maxWidthProperty().bind(mainSplitPane.widthProperty().multiply(0.25));
-        classesAnchorPane.minWidthProperty().bind(mainSplitPane.widthProperty().multiply(0.15));
-        detailsAnchorPane.maxWidthProperty().bind(mainSplitPane.widthProperty().multiply(0.25));
-        detailsAnchorPane.minWidthProperty().bind(mainSplitPane.widthProperty().multiply(0.15));
-        assignmentsAnchorPane.maxWidthProperty().bind(mainSplitPane.widthProperty().multiply(0.7));
-        assignmentsAnchorPane.minWidthProperty().bind(mainSplitPane.widthProperty().multiply(0.5));
+        classesAnchorPane.maxWidthProperty().bind(mainSplitPane.widthProperty().multiply(0.9));
+        classesAnchorPane.minWidthProperty().bind(mainSplitPane.widthProperty().multiply(0.05));
+        detailsAnchorPane.maxWidthProperty().bind(mainSplitPane.widthProperty().multiply(0.9));
+        detailsAnchorPane.minWidthProperty().bind(mainSplitPane.widthProperty().multiply(0.05));
+        assignmentsAnchorPane.maxWidthProperty().bind(mainSplitPane.widthProperty().multiply(0.9));
+        assignmentsAnchorPane.minWidthProperty().bind(mainSplitPane.widthProperty().multiply(0.05));
         
         classesList.prefWidthProperty().bind(classesAnchorPane.widthProperty().add(15));
         detailList.prefWidthProperty().bind(detailsAnchorPane.widthProperty().add(15));
         
         assignmentList.prefWidthProperty().bind(assignmentsAnchorPane.widthProperty());
-        assignmentColumn.prefWidthProperty().bind(assignmentList.widthProperty().multiply(0.45));
-        typeColumn.prefWidthProperty().bind(assignmentList.widthProperty().multiply(0.25));
+        assignmentColumn.prefWidthProperty().bind(assignmentList.widthProperty().multiply(0.35));
+        typeColumn.prefWidthProperty().bind(assignmentList.widthProperty().multiply(0.35));
         scoreColumn.prefWidthProperty().bind(assignmentList.widthProperty().multiply(0.15));
         gradeColumn.prefWidthProperty().bind(assignmentList.widthProperty().multiply(0.15));
         
