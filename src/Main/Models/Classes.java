@@ -122,22 +122,19 @@ public class Classes {
     }
     
     private void calculateGrade() {
+        if (assignments.size() == 0 || this.maxPoints == 0) {
+            return;
+        }
         this.percent = (double) (this.pointsEarned / this.maxPoints) * 100;
-        System.out.println(percent);
         if (percent >= 90) {
-            System.out.println("Set A");
             letterGrade = 'A';
         } else if (percent >= 80) {
-            System.out.println("Set B");
             letterGrade = 'B';
         } else if (percent >= 70) {
-            System.out.println("Set C");
             letterGrade = 'C';
         } else if (percent >= 60) {
-            System.out.println("Set D");
             letterGrade = 'D';
         } else {
-            System.out.println("Set F");
             letterGrade = 'F';
         }
     }

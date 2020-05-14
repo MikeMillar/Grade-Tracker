@@ -10,7 +10,8 @@ public class ClassDialog {
     @FXML private TextField courseNumField;
     @FXML private TextField courseNameField;
     @FXML private TextField professorNameField;
-    @FXML private TextField assignmentTypeField;
+//    @FXML private TextField assignmentTypeField;
+    @FXML private TextArea assignmentTypeField;
     
    public Classes createClass() {
        String num = courseNumField.getText();

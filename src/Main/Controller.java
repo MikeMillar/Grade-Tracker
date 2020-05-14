@@ -101,19 +101,19 @@ public class Controller {
                 .subtract(menuBar.getHeight() + detailsTitleHbox.getHeight() + 100));
         
         // Bind Width Values
-        classesAnchorPane.maxWidthProperty().bind(mainSplitPane.widthProperty().multiply(0.25));
-        classesAnchorPane.minWidthProperty().bind(mainSplitPane.widthProperty().multiply(0.15));
-        detailsAnchorPane.maxWidthProperty().bind(mainSplitPane.widthProperty().multiply(0.25));
-        detailsAnchorPane.minWidthProperty().bind(mainSplitPane.widthProperty().multiply(0.15));
-        assignmentsAnchorPane.maxWidthProperty().bind(mainSplitPane.widthProperty().multiply(0.7));
-        assignmentsAnchorPane.minWidthProperty().bind(mainSplitPane.widthProperty().multiply(0.5));
+        classesAnchorPane.maxWidthProperty().bind(mainSplitPane.widthProperty().multiply(0.9));
+        classesAnchorPane.minWidthProperty().bind(mainSplitPane.widthProperty().multiply(0.05));
+        detailsAnchorPane.maxWidthProperty().bind(mainSplitPane.widthProperty().multiply(0.9));
+        detailsAnchorPane.minWidthProperty().bind(mainSplitPane.widthProperty().multiply(0.05));
+        assignmentsAnchorPane.maxWidthProperty().bind(mainSplitPane.widthProperty().multiply(0.9));
+        assignmentsAnchorPane.minWidthProperty().bind(mainSplitPane.widthProperty().multiply(0.05));
         
         classesList.prefWidthProperty().bind(classesAnchorPane.widthProperty().add(15));
         detailList.prefWidthProperty().bind(detailsAnchorPane.widthProperty().add(15));
         
         assignmentList.prefWidthProperty().bind(assignmentsAnchorPane.widthProperty());
-        assignmentColumn.prefWidthProperty().bind(assignmentList.widthProperty().multiply(0.45));
-        typeColumn.prefWidthProperty().bind(assignmentList.widthProperty().multiply(0.25));
+        assignmentColumn.prefWidthProperty().bind(assignmentList.widthProperty().multiply(0.35));
+        typeColumn.prefWidthProperty().bind(assignmentList.widthProperty().multiply(0.35));
         scoreColumn.prefWidthProperty().bind(assignmentList.widthProperty().multiply(0.15));
         gradeColumn.prefWidthProperty().bind(assignmentList.widthProperty().multiply(0.15));
         
@@ -189,7 +189,7 @@ public class Controller {
         dialog.setTitle("Add a New Course");
         dialog.setHeaderText("Fill in the information below and press OK to add a new class");
         FXMLLoader classLoader = new FXMLLoader();
-        classLoader.setLocation(getClass().getResource("Dialogs\\ClassDialogFXML.fxml"));
+        classLoader.setLocation(getClass().getResource("Dialogs\\ClassDialogTest.fxml"));
         try {
             dialog.getDialogPane().setContent(classLoader.load());
         } catch (IOException e) {
@@ -221,7 +221,7 @@ public class Controller {
         dialog.setTitle("Edit an Existing Course");
         dialog.setHeaderText("Fill in the information below and press OK to edit the class");
         FXMLLoader classLoader = new FXMLLoader();
-        classLoader.setLocation(getClass().getResource("Dialogs\\ClassDialogFXML.fxml"));
+        classLoader.setLocation(getClass().getResource("Dialogs\\ClassDialogTest.fxml"));
         try {
             dialog.getDialogPane().setContent(classLoader.load());
         } catch (IOException e) {
@@ -269,7 +269,7 @@ public class Controller {
         dialog.setTitle("Add an Assignment");
         dialog.setHeaderText("Fill in the information below and press OK to add a new assignment");
         FXMLLoader loader = new FXMLLoader();
-        loader.setLocation(getClass().getResource("Dialogs\\AssignmentDialogFXML.fxml"));
+        loader.setLocation(getClass().getResource("Dialogs\\AssignmentDialogTest.fxml"));
         try {
             dialog.getDialogPane().setContent(loader.load());
         } catch (IOException e) {
@@ -302,7 +302,7 @@ public class Controller {
         dialog.setTitle("Edit an Assignment");
         dialog.setHeaderText("Fill in the information below and press OK to edit the assignment");
         FXMLLoader loader = new FXMLLoader();
-        loader.setLocation(getClass().getResource("Dialogs\\AssignmentDialogFXML.fxml"));
+        loader.setLocation(getClass().getResource("Dialogs\\AssignmentDialogTest.fxml"));
         try {
             dialog.getDialogPane().setContent(loader.load());
         } catch (IOException e) {
