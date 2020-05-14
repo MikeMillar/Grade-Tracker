@@ -108,8 +108,8 @@ public class Controller {
         assignmentsAnchorPane.maxWidthProperty().bind(mainSplitPane.widthProperty().multiply(0.9));
         assignmentsAnchorPane.minWidthProperty().bind(mainSplitPane.widthProperty().multiply(0.05));
         
-        classesList.prefWidthProperty().bind(classesAnchorPane.widthProperty().add(15));
-        detailList.prefWidthProperty().bind(detailsAnchorPane.widthProperty().add(15));
+        classesList.prefWidthProperty().bind(classesAnchorPane.widthProperty().add(15).subtract(10));
+        detailList.prefWidthProperty().bind(detailsAnchorPane.widthProperty().add(15).subtract(10));
         
         assignmentList.prefWidthProperty().bind(assignmentsAnchorPane.widthProperty());
         assignmentColumn.prefWidthProperty().bind(assignmentList.widthProperty().multiply(0.35));
