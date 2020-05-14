@@ -189,7 +189,7 @@ public class Controller {
         dialog.setTitle("Add a New Course");
         dialog.setHeaderText("Fill in the information below and press OK to add a new class");
         FXMLLoader classLoader = new FXMLLoader();
-        classLoader.setLocation(getClass().getResource("Dialogs\\ClassDialogFXML.fxml"));
+        classLoader.setLocation(getClass().getResource("Dialogs\\ClassDialogTest.fxml"));
         try {
             dialog.getDialogPane().setContent(classLoader.load());
         } catch (IOException e) {
@@ -221,7 +221,7 @@ public class Controller {
         dialog.setTitle("Edit an Existing Course");
         dialog.setHeaderText("Fill in the information below and press OK to edit the class");
         FXMLLoader classLoader = new FXMLLoader();
-        classLoader.setLocation(getClass().getResource("Dialogs\\ClassDialogFXML.fxml"));
+        classLoader.setLocation(getClass().getResource("Dialogs\\ClassDialogTest.fxml"));
         try {
             dialog.getDialogPane().setContent(classLoader.load());
         } catch (IOException e) {
@@ -269,7 +269,7 @@ public class Controller {
         dialog.setTitle("Add an Assignment");
         dialog.setHeaderText("Fill in the information below and press OK to add a new assignment");
         FXMLLoader loader = new FXMLLoader();
-        loader.setLocation(getClass().getResource("Dialogs\\AssignmentDialogFXML.fxml"));
+        loader.setLocation(getClass().getResource("Dialogs\\AssignmentDialogTest.fxml"));
         try {
             dialog.getDialogPane().setContent(loader.load());
         } catch (IOException e) {
@@ -302,7 +302,7 @@ public class Controller {
         dialog.setTitle("Edit an Assignment");
         dialog.setHeaderText("Fill in the information below and press OK to edit the assignment");
         FXMLLoader loader = new FXMLLoader();
-        loader.setLocation(getClass().getResource("Dialogs\\AssignmentDialogFXML.fxml"));
+        loader.setLocation(getClass().getResource("Dialogs\\AssignmentDialogTest.fxml"));
         try {
             dialog.getDialogPane().setContent(loader.load());
         } catch (IOException e) {

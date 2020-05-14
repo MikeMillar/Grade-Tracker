@@ -1,24 +1,46 @@
-<?import javafx.scene.control.DialogPane?>
-<?import javafx.scene.layout.HBox?>
-<?import javafx.scene.layout.GridPane?>
-<?import javafx.scene.control.Label?>
-<?import javafx.scene.control.TextField?>
-<DialogPane xmlns="http://javafx.com/javafx" xmlns:fx="http://javafx.com/fxml"
-            fx:controller="Main.Dialogs.ClassDialog"
-            prefWidth="400.0" prefHeight="400.0">
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
+
+<DialogPane xmlns="http://javafx.com/javafx/10.0.2-internal" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Main.Dialogs.ClassDialog">
     <content>
         <HBox>
-            <GridPane>
-                <Label text="Course Number:" GridPane.rowIndex="0" GridPane.columnIndex="0" GridPane.columnSpan="2"/>
-                <TextField fx:id="courseNumField" GridPane.rowIndex="0" GridPane.columnIndex="2" GridPane.columnSpan="2"/>
-                <Label text="Course Name:" GridPane.rowIndex="1" GridPane.columnIndex="0" GridPane.columnSpan="2"/>
-                <TextField fx:id="courseNameField" GridPane.rowIndex="1" GridPane.columnIndex="2" GridPane.columnSpan="2"/>
-                <Label text="Professor Name:" GridPane.rowIndex="2" GridPane.columnIndex="0" GridPane.columnSpan="2"/>
-                <TextField fx:id="professorNameField" GridPane.rowIndex="2" GridPane.columnIndex="2" GridPane.columnSpan="2"/>
-                <Label text="Assignment Types:" GridPane.rowIndex="3" GridPane.columnIndex="0" GridPane.columnSpan="2"/>
-                <Label text="Add your assignment types (Homework, Quiz, Exam, ect) followed by percent of your overall grade they represent. Use the following format: &quot;Homework:15&quot; where Homework is the type, and it's worth 15% of total grade. Separate each entry with commas"
-                       GridPane.rowIndex="4" GridPane.columnIndex="0" GridPane.columnSpan="4" GridPane.rowSpan="4" wrapText="true"/>
-                <TextField fx:id="assignmentTypeField" GridPane.rowIndex="9" GridPane.columnIndex="0" GridPane.columnSpan="4"/>
+            <GridPane alignment="TOP_CENTER" hgap="10.0" vgap="10.0">
+                <Label text="Course Number:" GridPane.columnIndex="0" GridPane.columnSpan="2" GridPane.rowIndex="0">
+               <font>
+                  <Font name="System Bold" size="12.0" />
+               </font></Label>
+                <TextField fx:id="courseNumField" GridPane.columnIndex="2" GridPane.columnSpan="2" GridPane.rowIndex="0" />
+                <Label text="Course Name:" GridPane.columnIndex="0" GridPane.columnSpan="2" GridPane.rowIndex="1">
+               <font>
+                  <Font name="System Bold" size="12.0" />
+               </font></Label>
+                <TextField fx:id="courseNameField" GridPane.columnIndex="2" GridPane.columnSpan="2" GridPane.rowIndex="1" />
+                <Label text="Professor Name:" GridPane.columnIndex="0" GridPane.columnSpan="2" GridPane.rowIndex="2" />
+                <TextField fx:id="professorNameField" GridPane.columnIndex="2" GridPane.columnSpan="2" GridPane.rowIndex="2" />
+                <Label text="Assignment Types:" GridPane.columnIndex="0" GridPane.columnSpan="2" GridPane.rowIndex="3" />
+                <Label text="Add your assignment types (Homework, Quiz, Exam, ect) followed by percent of your overall grade they represent. Use the following format: &quot;Homework:15&quot; where Homework is the type, and it's worth 15% of total grade. Separate each entry with commas" wrapText="true" GridPane.columnIndex="0" GridPane.columnSpan="4" GridPane.rowIndex="4" GridPane.rowSpan="4" />
+                <TextField fx:id="assignmentTypeField" GridPane.columnIndex="0" GridPane.columnSpan="4" GridPane.rowIndex="9" />
+            <columnConstraints>
+               <ColumnConstraints />
+               <ColumnConstraints />
+               <ColumnConstraints />
+               <ColumnConstraints />
+            </columnConstraints>
+            <rowConstraints>
+               <RowConstraints />
+               <RowConstraints />
+               <RowConstraints />
+               <RowConstraints />
+               <RowConstraints />
+               <RowConstraints />
+               <RowConstraints />
+               <RowConstraints />
+               <RowConstraints />
+               <RowConstraints />
+            </rowConstraints>
             </GridPane>
         </HBox>
     </content>
