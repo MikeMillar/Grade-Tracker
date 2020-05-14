@@ -42,8 +42,8 @@ public class Datasource {
     
     public void addClass(Classes classes1) {
         classes.add(classes1);
-        System.out.println("added class");
-        System.out.println(classes.size());
+//        System.out.println("added class");
+//        System.out.println(classes.size());
     }
     
     public void removeClass(Classes classes1) {
@@ -122,7 +122,7 @@ public class Datasource {
             StreamResult result = new StreamResult(new File(filePath));
             transformer.transform(source, result);
     
-            System.out.println("File saved!");
+//            System.out.println("File saved!");
             return true;
         } catch (ParserConfigurationException | TransformerException e) {
             e.printStackTrace();
@@ -177,7 +177,7 @@ public class Datasource {
                     }
                 }
             }
-            System.out.println("Finished loading courses.");
+//            System.out.println("Finished loading courses.");
             return true;
         } catch (ParserConfigurationException | SAXException | IOException e) {
             e.printStackTrace();
