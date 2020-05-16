@@ -80,14 +80,14 @@
                               <Insets left="10.0" right="10.0" />
                            </HBox.margin>
                         </Button>
-                         <Button fx:id="editClassBtn" onAction="#editClass" alignment="CENTER" minHeight="40.0" minWidth="60.0" style="-fx-background-color: transparent;" text="Edit" textFill="#9f9f9f" HBox.hgrow="NEVER">
+                         <Button fx:id="editClassBtn" alignment="CENTER" minHeight="40.0" minWidth="60.0" onAction="#editClass" style="-fx-background-color: transparent;" text="Edit" textFill="#9f9f9f" HBox.hgrow="NEVER">
                            <HBox.margin>
                               <Insets left="10.0" />
                            </HBox.margin>
                            <font>
                               <Font size="18.0" />
                            </font></Button>
-                         <Button fx:id="deleteClassBtn" onAction="#deleteClass" alignment="CENTER" minHeight="40.0" minWidth="40.0" style="-fx-background-color: transparent;" text="-" textFill="#9f9f9f" HBox.hgrow="NEVER">
+                         <Button fx:id="deleteClassBtn" alignment="CENTER" minHeight="40.0" minWidth="40.0" onAction="#deleteClass" style="-fx-background-color: transparent;" text="-" textFill="#9f9f9f" HBox.hgrow="NEVER">
                            <HBox.margin>
                               <Insets left="10.0" />
                            </HBox.margin>
@@ -125,14 +125,14 @@
                               <Insets left="10.0" right="10.0" />
                            </HBox.margin>
                         </Button>
-                         <Button fx:id="editAssignmentBtn" onAction="#editAssignment" alignment="CENTER" minHeight="40.0" minWidth="60.0" style="-fx-background-color: transparent;" text="Edit" textFill="#9f9f9f" HBox.hgrow="NEVER">
+                         <Button fx:id="editAssignmentBtn" alignment="CENTER" minHeight="40.0" minWidth="60.0" onAction="#editAssignment" style="-fx-background-color: transparent;" text="Edit" textFill="#9f9f9f" HBox.hgrow="NEVER">
                            <font>
                               <Font size="18.0" />
                            </font>
                            <HBox.margin>
                               <Insets left="10.0" />
                            </HBox.margin></Button>
-                         <Button fx:id="deleteAssignmentBtn" onAction="#deleteAssignment" alignment="CENTER" minHeight="40.0" minWidth="40.0" style="-fx-background-color: transparent;" text="-" textFill="#9f9f9f" HBox.hgrow="NEVER">
+                         <Button fx:id="deleteAssignmentBtn" alignment="CENTER" minHeight="40.0" minWidth="40.0" onAction="#deleteAssignment" style="-fx-background-color: transparent;" text="-" textFill="#9f9f9f" HBox.hgrow="NEVER">
                            <font>
                               <Font size="18.0" />
                            </font>
@@ -184,7 +184,7 @@
                         </Label>
                      </children>
                   </HBox>
-                  <ListView fx:id="detailList" layoutY="40.0" prefHeight="510.0" prefWidth="248.0" style="-fx-background-color: transparent;" stylesheets="@StyleSheets/classList.css" />
+                  <ScrollPane fx:id="detailsScrollPane" layoutX="-4.0" layoutY="39.0" prefHeight="250.0" prefWidth="250.0" stylesheets="@StyleSheets/detailsList.css"/>
                </children>
             </AnchorPane>
       </items>
