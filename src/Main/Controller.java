@@ -2,6 +2,7 @@ package Main;
 
 import Main.Dialogs.AssignmentDialog;
 import Main.Dialogs.ClassDialog;
+import Main.Dialogs.StackedPanes;
 import Main.Models.*;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
@@ -10,10 +11,13 @@ import javafx.collections.ObservableList;
 import javafx.concurrent.Task;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.geometry.Bounds;
+import javafx.geometry.Insets;
+import javafx.geometry.Pos;
 import javafx.scene.control.*;
-import javafx.scene.layout.AnchorPane;
-import javafx.scene.layout.HBox;
-import javafx.scene.layout.VBox;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
+import javafx.scene.layout.*;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -82,7 +86,23 @@ public class Controller {
     // Detail Sub-Items
     @FXML private HBox detailsTitleHbox;
     @FXML private Label detailsLabel;
-    @FXML private ListView<String> detailList; // Add type to view
+    @FXML private ScrollPane detailsScrollPane;
+    @FXML private VBox detailsVBox;
+    @FXML private TitledPane courseDetailsPane;
+    @FXML private Label courseDetailNameLabel;
+    @FXML private Label professorDetailLabel;
+    @FXML private Label contactDetailLabel;
+    @FXML private Label officeHoursDetailLabel;
+    @FXML private Label classTimesDetailLabel;
+    @FXML private Label gradeDetailLabel;
+    
+    @FXML private TitledPane assignmentDetailsPane;
+    
+    
+    @FXML private TitledPane upcomingDetailPane;
+    @FXML private ListView<String> upcomingList;
+    
+//    @FXML private ListView<String> detailList; // Add type to view
     
     // Lists
     public ArrayList<Classes> classesArrayList;
@@ -92,12 +112,68 @@ public class Controller {
     public void initialize() {
         mainSplitPane.setFocusTraversable(false);
         
+        courseDetailsPane = new TitledPane();
+        assignmentDetailsPane = new TitledPane();
+        upcomingDetailPane = new TitledPane();
+        TitledPane test1 = new TitledPane();
+        TitledPane test2 = new TitledPane();
+        TitledPane test3 = new TitledPane();
+        TitledPane test4 = new TitledPane();
+        TitledPane test5 = new TitledPane();
+        TitledPane test6 = new TitledPane();
+        TitledPane test7 = new TitledPane();
+        TitledPane test8 = new TitledPane();
+        TitledPane test9 = new TitledPane();
+        TitledPane test10 = new TitledPane();
+        TitledPane test11 = new TitledPane();
+        TitledPane test12 = new TitledPane();
+        TitledPane test13 = new TitledPane();
+        TitledPane test14 = new TitledPane();
+        TitledPane test15 = new TitledPane();
+        TitledPane test16 = new TitledPane();
+        TitledPane test17 = new TitledPane();
+        TitledPane test18 = new TitledPane();
+        TitledPane test19 = new TitledPane();
+        TitledPane test20 = new TitledPane();
+        TitledPane test21 = new TitledPane();
+        TitledPane test22 = new TitledPane();
+        TitledPane test23 = new TitledPane();
+        TitledPane test24 = new TitledPane();
+        TitledPane test25 = new TitledPane();
+        TitledPane test26 = new TitledPane();
+        TitledPane test27 = new TitledPane();
+        TitledPane test28 = new TitledPane();
+        TitledPane test29 = new TitledPane();
+        TitledPane test30 = new TitledPane();
+        TitledPane test31 = new TitledPane();
+        TitledPane test32 = new TitledPane();
+    
+//        ScrollPane stackedScroll = new ScrollPane();
+
+////        stackedScroll.prefWidth(250);
+        
+        StackedPanes stackedPanes = new StackedPanes(detailsAnchorPane, courseDetailsPane, assignmentDetailsPane,
+                upcomingDetailPane, test1, test2, test3, test4, test5, test6, test7, test8, test9, test10, test11,
+                test12, test13, test14, test15, test16, test17, test18, test19, test20, test21, test22, test23,
+                test24, test25, test26, test27, test28, test29, test30, test31, test32);
+        
+        detailsScrollPane.setContent(stackedPanes);
+        for (TitledPane tp: stackedPanes.getPaneList()) {
+            GridPane gridPane = new GridPane();
+            for (int i = 0; i < 4; i++) {
+                gridPane.addRow(i, new Label("Test Label " + (i + 1)));
+            }
+            tp.setText("Pane Test");
+            tp.setContent(gridPane);
+        }
+        detailsAnchorPane.getChildren().setAll(detailsTitleHbox, detailsScrollPane);
+        
         // Bind Height Values
         classesList.prefHeightProperty().bind(Main.stage.heightProperty()
                 .subtract(menuBar.getHeight() + classesTitleHbox.getHeight() + 100));
         assignmentList.prefHeightProperty().bind(Main.stage.heightProperty()
                 .subtract(menuBar.getHeight() + assignmentTitleHbox.getHeight() + 90));
-        detailList.prefHeightProperty().bind(Main.stage.heightProperty()
+        detailsScrollPane.prefHeightProperty().bind(Main.stage.heightProperty()
                 .subtract(menuBar.getHeight() + detailsTitleHbox.getHeight() + 100));
         
         // Bind Width Values
@@ -109,7 +185,7 @@ public class Controller {
         assignmentsAnchorPane.minWidthProperty().bind(mainSplitPane.widthProperty().multiply(0.05));
         
         classesList.prefWidthProperty().bind(classesAnchorPane.widthProperty().add(15));
-        detailList.prefWidthProperty().bind(detailsAnchorPane.widthProperty().add(15));
+        detailsScrollPane.prefWidthProperty().bind(detailsAnchorPane.widthProperty().add(15));
         
         assignmentList.prefWidthProperty().bind(assignmentsAnchorPane.widthProperty());
         assignmentColumn.prefWidthProperty().bind(assignmentList.widthProperty().multiply(0.35));
@@ -131,21 +207,7 @@ public class Controller {
         editAssignmentBtn.setOnMouseExited(e -> editAssignmentBtn.setStyle("-fx-background-color:transparent;"));
         deleteAssignmentBtn.setOnMouseEntered(e -> deleteAssignmentBtn.setStyle("-fx-font-weight:bold;"));
         deleteAssignmentBtn.setOnMouseExited(e -> deleteAssignmentBtn.setStyle("-fx-background-color:transparent;"));
-    
-    
-    
-        ObservableList<String> detailTest = FXCollections.observableArrayList();
         
-//        // Test Data Seeding
-//        for (int i = 0; i < 50; i++) {
-//            Classes addClass = new Classes("TEST-Class", "TestCourse " + i, "Test Prof", "HW:15");
-//            Datasource.getInstance().addClass(addClass);
-//            for (int j = 0; j < 50; j++) {
-//                addClass.addAssignment(new Assignment("TypeTest" + j, "HW",
-//                        "Test description", 20, 20));
-//            }
-//            detailTest.add("Test" + i);
-//        }
         
         classesList.setItems(Datasource.getInstance().getClasses());
         classesList.getSelectionModel().selectFirst();
@@ -159,7 +221,7 @@ public class Controller {
             deleteClassBtn.setDisable(true);
             addAssignmentBtn.setDisable(true);
         }
-        detailList.setItems(detailTest);
+        
         classesList.getSelectionModel().selectedItemProperty().addListener(new ChangeListener<Classes>() {
             @Override
             public void changed(ObservableValue<? extends Classes> observableValue, Classes classes, Classes t1) {
@@ -180,6 +242,53 @@ public class Controller {
                 }
             }
         });
+    }
+    
+    private VBox createStackedTitledPanes() {
+        final Image BLUE_FISH   = new Image("http://icons.iconarchive.com/icons/fasticon/fish-toys/128/Blue-Fish-icon.png");
+        final Image RED_FISH    = new Image("http://icons.iconarchive.com/icons/fasticon/fish-toys/128/Red-Fish-icon.png");
+        final Image YELLOW_FISH = new Image("http://icons.iconarchive.com/icons/fasticon/fish-toys/128/Yellow-Fish-icon.png");
+        final Image GREEN_FISH  = new Image("http://icons.iconarchive.com/icons/fasticon/fish-toys/128/Green-Fish-icon.png");
+        
+        final VBox stackedTitledPanes = new VBox();
+        stackedTitledPanes.getChildren().setAll(
+                createTitledPane("One Fish",  GREEN_FISH),
+                createTitledPane("Two Fish",  YELLOW_FISH, GREEN_FISH),
+                createTitledPane("Red Fish",  RED_FISH),
+                createTitledPane("Blue Fish", BLUE_FISH)
+        );
+        ((TitledPane) stackedTitledPanes.getChildren().get(0)).setExpanded(true);
+//        stackedTitledPanes.getStyleClass().add("stacked-titled-panes");
+        
+        return stackedTitledPanes;
+    }
+    
+    public TitledPane createTitledPane(String title, Image... images) {
+        FlowPane content = new FlowPane();
+        for (Image image: images) {
+            ImageView imageView = new ImageView(image);
+            content.getChildren().add(imageView);
+            
+            FlowPane.setMargin(imageView, new Insets(10));
+        }
+        content.setAlignment(Pos.TOP_CENTER);
+        
+        TitledPane pane = new TitledPane(title, content);
+//        pane.getStyleClass().add("stacked-titled-pane");
+        pane.setExpanded(false);
+        
+        return pane;
+    }
+    
+    private ScrollPane makeScrollable(final VBox node) {
+        final ScrollPane scroll = new ScrollPane();
+//        scroll.setContent(node);
+        scroll.viewportBoundsProperty().addListener(new ChangeListener<Bounds>() {
+            @Override public void changed(ObservableValue<? extends Bounds> ov, Bounds oldBounds, Bounds bounds) {
+                scroll.prefHeight(100);
+            }
+        });
+        return scroll;
     }
     
     @FXML
